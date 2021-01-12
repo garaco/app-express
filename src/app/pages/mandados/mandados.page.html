@@ -1,0 +1,79 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary" >
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mandados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12"> 
+        <ion-label class="negritas" color="success" >Direccion Inicial</ion-label>
+      </ion-col>
+      
+      <ion-col size="2">
+        <ion-button color="primary" (click)="inicio()" >
+          <ion-icon name="location"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="10">
+        <ion-item>
+          <ion-label class="ion-text-wrap" > {{ direccion }} </ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">¿Que se va arealizar?</ion-label>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12">
+        <ion-label class="negritas" color="danger" >Direccion del destino</ion-label>
+      </ion-col>
+
+      <ion-col size="2">
+        <ion-button color="primary" (click)="final()">
+          <ion-icon name="location"></ion-icon>
+        </ion-button>
+      </ion-col>
+      <ion-col size="10">
+        <ion-item>
+          <ion-label class="ion-text-wrap" > {{ destino }} </ion-label>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">¿Que se va arealizar?</ion-label>
+          <ion-textarea></ion-textarea>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid fixed>
+    <ion-row>
+
+      <ion-col size="4" offset="4">
+        <ion-button (click)="guardar()">
+          Aceptar
+        </ion-button>
+      </ion-col>
+    
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,41 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary" >
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Servicios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12"> 
+        <ion-label class="negritas" color="dark" >Realiza tus pagos de servicios  </ion-label>
+        <ion-note> (pago de ,agua, luz, depositos) </ion-note>
+      </ion-col>
+    
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating">¿Que vas a realizar?</ion-label>
+          <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+        </ion-item>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid fixed>
+    <ion-row>
+
+      <ion-col size="4" offset="4">
+        <ion-button (click)="guardar()">
+          Aceptar
+        </ion-button>
+      </ion-col>
+    
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>

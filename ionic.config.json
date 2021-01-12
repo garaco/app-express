@@ -1,0 +1,7 @@
+{
+  "name": "app-express",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

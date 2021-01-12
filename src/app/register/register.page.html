@@ -1,0 +1,90 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+    <ion-item lines="none" >
+      <ion-img src="assets/img/logo.jpg"></ion-img>    
+    </ion-item>
+
+    <ion-list *ngIf="!envio">
+      <ion-grid fixed>
+        <ion-row>
+        
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+            </ion-item>
+          </ion-col>
+    
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Apellidos</ion-label>
+              <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+            </ion-item>
+          </ion-col>
+    
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+            </ion-item>
+          </ion-col>
+    
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating">Telefono</ion-label>
+              <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+            </ion-item>
+          </ion-col>
+    
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="2">
+            <ion-button color="primary" (click)="direction()" >
+              <ion-icon name="location"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="10">
+            <ion-item>
+              <ion-label class="ion-text-wrap" > {{ direccion }} </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    
+
+      <ion-item style="width: 40%; left: 30%;" lines="none" >
+        <ion-button expand="block" (click)="send()">
+          registrar 
+        </ion-button>
+      </ion-item>  
+
+    </ion-list>
+
+    <ion-list *ngIf="envio" >
+      <ion-item style="width: 60%; left: 20%;" >
+        <ion-label position="floating">Ingrese su Codigo</ion-label>
+        <ion-input  type="text"></ion-input>
+      </ion-item>
+  
+      <ion-item style="width: 40%; left: 30%;" lines="none" >
+        
+        <ion-button expand="block" (click)="login()" >
+          Ingresar 
+        </ion-button>
+      
+      </ion-item>  
+      
+    </ion-list>
+    
+  
+</ion-content>

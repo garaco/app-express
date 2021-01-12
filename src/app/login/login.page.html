@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border" >
+  <ion-toolbar>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+    <ion-item lines="none" >
+      <ion-img src="assets/img/logo.jpg"></ion-img>    
+    </ion-item>
+  
+    <ion-item lines="none" >
+
+    </ion-item>
+    <ion-list *ngIf="!envio">
+      <ion-item style="width: 60%; left: 20%;" >
+        <ion-label position="floating">Email</ion-label>
+        <ion-input  type="text"></ion-input>
+      </ion-item>
+  
+      <ion-item style="width: 40%; left: 30%;" lines="none" >
+        
+        <ion-button expand="block" (click)="send()" >
+          siguiente
+        </ion-button>
+        
+      </ion-item>  
+      <ion-item style="width: 40%; left: 30%;" lines="none" href="register" >
+        
+        <ion-label color="primary" >Reistrarme</ion-label>
+        
+      </ion-item>  
+
+      
+    </ion-list>
+
+    <ion-list *ngIf="envio" >
+      <ion-item style="width: 60%; left: 20%;" >
+        <ion-label position="floating">Ingrese su Codigo</ion-label>
+        <ion-input  type="text"></ion-input>
+      </ion-item>
+  
+      <ion-item style="width: 40%; left: 30%;" lines="none" >
+        
+        <ion-button expand="block" (click)="login()" >
+          Ingresar 
+        </ion-button>
+      
+      </ion-item>  
+      
+    </ion-list>
+    
+  
+</ion-content>
