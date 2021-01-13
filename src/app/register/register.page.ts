@@ -44,18 +44,10 @@ export class RegisterPage implements OnInit {
 
   async send(){
     const cadena = this.generaNss();
-    let email = {
-      to: 'ale17garaco@gmail.com',
-      cc: '',
-      bcc: [],
-      attachments: [],
-      subject: 'Codigo de ingreso',
-      body: cadena,
-      isHtml: false
-    }
+
     console.log(cadena);
     
-     this.emailComposer.open(email);
+
 
      const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
