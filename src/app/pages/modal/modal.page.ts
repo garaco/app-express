@@ -73,7 +73,8 @@ export class ModalPage implements OnInit {
     .then(res => res.json())
     .then(data =>  {      
       this.modal.dismiss({
-        direccion:data.features[0].place_name
+        direccion:data.features[0].place_name,
+        coordenadas:this.gl
       });
     } );
 

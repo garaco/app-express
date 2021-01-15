@@ -17,28 +17,28 @@
           <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Nombre</ion-label>
-              <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+              <ion-input [(ngModel)]="users.name" type="text" ></ion-input>
             </ion-item>
           </ion-col>
     
           <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Apellidos</ion-label>
-              <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+              <ion-input [(ngModel)]="users.surname" type="text" ></ion-input>
             </ion-item>
           </ion-col>
     
           <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Email</ion-label>
-              <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+              <ion-input [(ngModel)]="users.email" type="email" ></ion-input>
             </ion-item>
           </ion-col>
     
           <ion-col size="12">
             <ion-item>
               <ion-label position="floating">Telefono</ion-label>
-              <ion-input aria-placeholder="nombre la o las tiendas donde se realizara la compra" ></ion-input>
+              <ion-input [(ngModel)]="users.phone" type="number" ></ion-input>
             </ion-item>
           </ion-col>
     
@@ -54,7 +54,7 @@
           </ion-col>
           <ion-col size="10">
             <ion-item>
-              <ion-label class="ion-text-wrap" > {{ direccion }} </ion-label>
+              <ion-label class="ion-text-wrap" > {{ users.direction }} </ion-label>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -73,7 +73,7 @@
     <ion-list *ngIf="envio" >
       <ion-item style="width: 60%; left: 20%;" >
         <ion-label position="floating">Ingrese su Codigo</ion-label>
-        <ion-input  type="text"></ion-input>
+        <ion-input [(ngModel)]="codigo"  type="text"></ion-input>
       </ion-item>
   
       <ion-item style="width: 40%; left: 30%;" lines="none" >
@@ -85,6 +85,20 @@
       </ion-item>  
       
     </ion-list>
+
+    <ion-col size="12" *ngIf="loadin"  >
+
+      <ion-item style="width: 40%; left: 30%;" lines="none" >
+      
+        <ion-label>
+          Cargando....
+        </ion-label>
+      
+      </ion-item>  
+      
+    
+      <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    </ion-col>
     
   
 </ion-content>

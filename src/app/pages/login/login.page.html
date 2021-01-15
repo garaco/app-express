@@ -18,7 +18,7 @@
       <ion-col size="12">
         <ion-item style="width: 60%; left: 20%;" >
           <ion-label position="floating">Email</ion-label>
-          <ion-input  type="text"></ion-input>
+          <ion-input [(ngModel)]="email" type="text"></ion-input>
         </ion-item>
       </ion-col>
 
@@ -48,7 +48,7 @@
       <ion-col size="12">
         <ion-item style="width: 60%; left: 20%;" >
           <ion-label position="floating">Ingrese su Codigo</ion-label>
-          <ion-input  type="text"></ion-input>
+          <ion-input [(ngModel)]="codigo" type="text">  </ion-input>
         </ion-item>
       </ion-col>
 
@@ -60,6 +60,20 @@
           </ion-button>
         
         </ion-item>  
+      </ion-col>
+
+      <ion-col size="12" *ngIf="loadin"  >
+
+        <ion-item style="width: 40%; left: 30%;" lines="none" >
+        
+          <ion-label>
+            Cargando....
+          </ion-label>
+        
+        </ion-item>  
+        
+      
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
       </ion-col>
       
     </ion-row>

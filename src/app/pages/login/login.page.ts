@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 // import { EmailComposer } from '@ionic-native/email-composer';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { AlertController, Platform } from '@ionic/angular';
+import { ExpressService } from 'src/app/services/express.service';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,17 @@ export class LoginPage implements OnInit {
 
   envio:boolean = false;
   subscribe:any;
+  codigo:string;
+  email:string;
+  loadin:boolean=false;
 
 
-  constructor(private emailComposer: EmailComposer,
+  constructor(
     public alertController: AlertController,
     private router: Router,
+    private express: ExpressService,
     private platform:Platform ) {
+
       this.subscribe = this.platform.backButton.subscribeWithPriority( 666666, () =>{
         if(this.constructor.name ==  'LoginPage'){
           navigator['app'].exitApp();
@@ -29,25 +35,40 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  async send(){
-    const cadena = this.generaNss();
-    
-    console.log(cadena);
 
-     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Se ha enviado un codigo al email ingresado',
-      message: '',
-      buttons: ['OK']
-    });
+  send(){
 
-    await alert.present();
+    this.express.getEmail( this.email, this.generaNss() )
+                .subscribe( async result =>{
+                  
+                  if(result.message === 'email enviado'){
 
-    this.envio = true;
+                    const alert = await this.alertController.create({
+                      cssClass: 'my-custom-class',
+                      header: 'Registrado correctamente',
+                      subHeader:'Se ha enviado un codigo al email registrado',
+                      message: '',
+                      buttons: ['OK']
+                    });
+                
+                    await alert.present();
+                
+                    this.envio = true;
+
+                  }
+                } );
+
   }
 
   login(){
-    this.router.navigateByUrl('inicio');
+    this.loadin=true;
+    this.express.getLogin( this.codigo )
+    .subscribe( result => {
+      if(result.login){
+        this.loadin=false;
+        this.router.navigateByUrl('inicio');
+      }
+    } );
   }
 
   generaNss() {
