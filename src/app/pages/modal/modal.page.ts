@@ -42,6 +42,8 @@ export class ModalPage implements OnInit {
   }
 
   getmapa(){
+    this.vermapa=true;
+    
     this.map = new Leaflet.Map('map').setView([18.4410739, -95.2076404], 18);
 
     new Leaflet.tileLayer(this.title, {

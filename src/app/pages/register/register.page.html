@@ -15,30 +15,38 @@
         <ion-row>
         
           <ion-col size="12">
-            <ion-item>
-              <ion-label position="floating">Nombre</ion-label>
-              <ion-input [(ngModel)]="users.name" type="text" ></ion-input>
+            <ion-item lines="none" >
+              <label class="custom-field one">
+                <input [(ngModel)]="users.name" required type="text"/>
+                <span class="placeholder">Nombre</span>
+              </label>
             </ion-item>
           </ion-col>
     
           <ion-col size="12">
-            <ion-item>
-              <ion-label position="floating">Apellidos</ion-label>
-              <ion-input [(ngModel)]="users.surname" type="text" ></ion-input>
+            <ion-item lines="none" >
+              <label class="custom-field one">
+                <input [(ngModel)]="users.surname" required type="text"/>
+                <span class="placeholder">Apellidos</span>
+              </label>
             </ion-item>
           </ion-col>
     
           <ion-col size="12">
-            <ion-item>
-              <ion-label position="floating">Email</ion-label>
-              <ion-input [(ngModel)]="users.email" type="email" ></ion-input>
+            <ion-item lines="none" >
+              <label class="custom-field one">
+                <input [(ngModel)]="users.email" required type="text"/>
+                <span class="placeholder">Email</span>
+              </label>
             </ion-item>
           </ion-col>
     
           <ion-col size="12">
-            <ion-item>
-              <ion-label position="floating">Telefono</ion-label>
-              <ion-input [(ngModel)]="users.phone" type="number" ></ion-input>
+            <ion-item lines="none" >
+              <label class="custom-field one">
+                <input [(ngModel)]="users.phone" required type="text"/>
+                <span class="placeholder">Telefono</span>
+              </label>
             </ion-item>
           </ion-col>
     
@@ -53,6 +61,7 @@
             </ion-button>
           </ion-col>
           <ion-col size="10">
+            
             <ion-item>
               <ion-label class="ion-text-wrap" > {{ users.direction }} </ion-label>
             </ion-item>
@@ -71,11 +80,12 @@
     </ion-list>
 
     <ion-list *ngIf="envio" >
-      <ion-item style="width: 60%; left: 20%;" >
-        <ion-label position="floating">Ingrese su Codigo</ion-label>
-        <ion-input [(ngModel)]="codigo"  type="text"></ion-input>
+      <ion-item lines="none" >
+        <label class="custom-field one">
+          <input [(ngModel)]="codigo" required type="text"/>
+          <span class="placeholder">Ingrese su Codigo</span>
+        </label>
       </ion-item>
-  
       <ion-row>
         <ion-col size="12" style="width: 40%;" >
         
