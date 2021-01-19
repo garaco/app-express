@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import * as Mapboxgl from 'mapbox-gl';
+import * as Leaflet from 'leaflet';
+import { ExpressService } from 'src/app/services/express.service';
 
 @Component({
   selector: 'app-modal',
@@ -15,10 +16,16 @@ export class ModalPage implements OnInit {
   datos:string=''; 
   gl:string='';
   direccion:string='';
-  mapa: Mapboxgl.Map;
+  map:Leaflet.Map;
   vermapa:boolean=false;
+  title:string = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+  lat:any;
+  lng:any;
+  marker:Leaflet.marker;
 
-  constructor(private modal: ModalController) { 
+  
+  constructor(private modal: ModalController,
+            private express:ExpressService) { 
     // aqui va a ir el mapa
     
   }
@@ -35,51 +42,51 @@ export class ModalPage implements OnInit {
   }
 
   getmapa(){
-    this.vermapa=true;
-    
-    Mapboxgl.accessToken = this.mapboxgl;
-    this.mapa = new Mapboxgl.Map({
-    container: 'map', // container id
-    style: 'mapbox://styles/larsson/ckjqz2unm31lt19s5ivdsstdz',
-    center: [-95.2123416,18.4483123], // starting position
-    zoom: 15 // starting zoom
+    this.map = new Leaflet.Map('map').setView([18.4410739, -95.2076404], 18);
+
+    new Leaflet.tileLayer(this.title, {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
+
+    this.map.locate({enableHighAccuracy:true })
+
+    this.map.on('locationfound', e =>{
+      this.gl = `${e.latlng.lat} , ${e.latlng.lng}`;
+      this.market(e.latlng.lat , e.latlng.lng);
+      this.lat=e.latlng.lat;
+      this.lng=e.latlng.lng;
     });
-    this.mapa.addControl(new Mapboxgl.NavigationControl());
-     this.marcador(-95.2123416,18.4483123);
+  
   }
 
-  marcador(lng: number, lat: number){
+  market(lng: number, lat: number){
 
-    const marker = new Mapboxgl.Marker({
-    draggable: true
-    })
-    .setLngLat([lng, lat])
-    .addTo(this.mapa);
-    marker.on('drag', ()=> {
-       this.gl = marker.getLngLat() ;
-       this.datos = String(this.gl);
-
-       var dato  = this.datos.split("(");
-       var dat = dato[1].split(")");
-
-       this.gl=dat[0];
+    //crear un marcador draggable
+     this.marker =  new Leaflet.marker([lng, lat], {draggable:'true'})
+                        .addTo(this.map)
+                        .bindPopup('Mueveme para seleccionar tu direccion.')
+                        .openPopup();
+      //cuando se termine de hacer drag, pone la ubicacion en el campo indicado
+      this.marker.on("dragend", () => {
+        var position = this.marker.getLatLng();
+        
+        this.lat=position.lat;
+        this.lng=position.lng;
       
-    });
+        });
+
   }
+
 
   salirDatos(){
-
-   fetch(`https://api.mapbox.com/geocoding/v5/mapbox.places/${this.gl}.json?types=address&access_token=`+this.mapboxgl)
-    .then(res => res.json())
-    .then(data =>  {      
-      this.modal.dismiss({
-        direccion:data.features[0].place_name,
-        coordenadas:this.gl
-      });
-    } );
-
-
-
+    
+    this.express.location(this.lat, this.lng)
+                  .subscribe( result => {
+                       this.modal.dismiss({
+                        direccion:result['display_name'],
+                        coordenadas:this.gl
+                      });
+                  } );
   }
 
   salir(){

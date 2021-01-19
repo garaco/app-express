@@ -1,7 +1,12 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Direcciones</ion-title>
-  </ion-toolbar>
+    <ion-title>seleciona tu direccion</ion-title>
+    <ion-buttons slot="end" >
+      <ion-button color="primary" *ngIf="vermapa" (click)="salirDatos()">
+        <ion-icon name="checkmark-outline"></ion-icon> Aceptar 
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar> 
 </ion-header>
 
 <ion-content>
@@ -29,12 +34,6 @@
 
   </ion-list>
 
-  <div id="map"></div>
-
-  <ion-col *ngIf="vermapa" size="12" offset="4">
-    <ion-button (click)="salirDatos()">
-      Aceptar
-    </ion-button>
-  </ion-col>
+  <div id="map" ></div>
   
 </ion-content>

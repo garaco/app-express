@@ -38,3 +38,11 @@ ion-menu-button {
   display: inline-block;
   clip-path: circle(100% at 10% -45%);
   }
+
+  .degradado {
+    background: #000046;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(top, #3880ff, #010179);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #3880ff, #010179); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    height: 100%;
+  }

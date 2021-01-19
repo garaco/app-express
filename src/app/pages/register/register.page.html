@@ -57,16 +57,16 @@
               <ion-label class="ion-text-wrap" > {{ users.direction }} </ion-label>
             </ion-item>
           </ion-col>
+
+          <ion-col size="12" style="width: 40%;" >
+            <ion-button expand="block" (click)="send()">
+              registrar 
+            </ion-button>
+          </ion-col> 
+
         </ion-row>
       </ion-grid>
 
-    
-
-      <ion-item style="width: 40%; left: 30%;" lines="none" >
-        <ion-button expand="block" (click)="send()">
-          registrar 
-        </ion-button>
-      </ion-item>  
 
     </ion-list>
 
@@ -76,13 +76,16 @@
         <ion-input [(ngModel)]="codigo"  type="text"></ion-input>
       </ion-item>
   
-      <ion-item style="width: 40%; left: 30%;" lines="none" >
+      <ion-row>
+        <ion-col size="12" style="width: 40%;" >
         
-        <ion-button expand="block" (click)="login()" >
-          Ingresar 
-        </ion-button>
+          <ion-button expand="block" (click)="login()" >
+            Ingresar 
+          </ion-button>
+        
+        </ion-col>  
+      </ion-row>
       
-      </ion-item>  
       
     </ion-list>
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // import { EmailComposer } from '@ionic-native/email-composer';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { ExpressService } from 'src/app/services/express.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
   envio:boolean = false;
   subscribe:any;
   codigo:string;
-  email:string;
+  email:string='';
   loadin:boolean=false;
 
 
@@ -23,7 +23,8 @@ export class LoginPage implements OnInit {
     public alertController: AlertController,
     private router: Router,
     private express: ExpressService,
-    private platform:Platform ) {
+    private platform:Platform,
+    private toastController: ToastController ) {
 
       this.subscribe = this.platform.backButton.subscribeWithPriority( 666666, () =>{
         if(this.constructor.name ==  'LoginPage'){
@@ -36,25 +37,53 @@ export class LoginPage implements OnInit {
   }
 
 
-  send(){
 
-    this.express.getEmail( this.email, this.generaNss() )
+  async send(){
+    const token = this.generaNss();
+
+     if(this.email !=='' ){
+      this.getEnviar(this.email, token);
+     }else{
+      const toast = await this.toastController.create({
+        message: 'Ingresar email pro favor.',
+        position:"top",
+        animated:true,
+        color:'danger',
+        duration: 2000
+      });
+      toast.present();
+     }
+
+
+  }
+
+  getEnviar( email:string, token:string ){
+    this.loadin=true;
+    this.express.getToken( email, token )
                 .subscribe( async result =>{
                   
                   if(result.message === 'email enviado'){
 
                     const alert = await this.alertController.create({
                       cssClass: 'my-custom-class',
-                      header: 'Registrado correctamente',
                       subHeader:'Se ha enviado un codigo al email registrado',
                       message: '',
                       buttons: ['OK']
                     });
-                
+                    this.loadin=false;
                     await alert.present();
                 
                     this.envio = true;
 
+                  }else{
+                    const toast = await this.toastController.create({
+                      message: result.message,
+                      position:"top",
+                      animated:true,
+                      color:'danger',
+                      duration: 2000
+                    });
+                    toast.present();
                   }
                 } );
 
@@ -63,8 +92,9 @@ export class LoginPage implements OnInit {
   login(){
     this.loadin=true;
     this.express.getLogin( this.codigo )
-    .subscribe( result => {
+    .subscribe(async result => {
       if(result.login){
+        await this.express.saveStorage('user', result.user);
         this.loadin=false;
         this.router.navigateByUrl('inicio');
       }

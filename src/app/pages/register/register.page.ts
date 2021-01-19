@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/models/userModels';
 import { ExpressService } from 'src/app/services/express.service';
 import { ModalPage } from '../modal/modal.page';
@@ -33,7 +33,8 @@ export class RegisterPage implements OnInit {
               private expres: ExpressService,
               private router:Router,
               public alertController:AlertController,
-              private express:ExpressService ) {
+              private express:ExpressService,
+              private toastController: ToastController ) {
     this.regiter=true;
    }
 
@@ -58,19 +59,41 @@ export class RegisterPage implements OnInit {
     
   }
 
-  send(){
+  async send(){
     this.users.token = this.generaNss();
     this.users.phone = String(this.users.phone)
-    
-     this.express.getNewUSer(this.users)
-        .subscribe( result => {
+    if( this.users.phone !== '' && this.users.email !== '' && this.users.name !== '' && this.users.surname !== ''
+    && this.users.location !== '' && this.users.email !== ''){
+      this.express.getNewUSer(this.users)
+      .subscribe( async result => {
+        console.log(result['message']);
+        
+        if(result['message']){
+
+          this.getEnviar();
+        }else{
+        
           
-          if(result['message']){
-
-            this.getEnviar();
-          }
-        } )
-
+          const toast = await this.toastController.create({
+            message: 'Email ya ha sido registrado',
+            position:"top",
+            animated:true,
+            color:'danger',
+            duration: 2000
+          });
+          toast.present();
+        }
+      } );
+    }else{
+      const toast = await this.toastController.create({
+        message: 'LLenar todos los campos por favor',
+        position:"top",
+        animated:true,
+        color:'danger',
+        duration: 2000
+      });
+      toast.present();
+    }
 
   }
 
@@ -101,8 +124,9 @@ export class RegisterPage implements OnInit {
   login(){
     this.loadin=true;
     this.expres.getLogin( this.codigo )
-    .subscribe( result => {
+    .subscribe( async result => {
       if(result.login){
+        await this.express.saveStorage('user', result.user);
         this.loadin=false;
         this.router.navigateByUrl('inicio');
       }

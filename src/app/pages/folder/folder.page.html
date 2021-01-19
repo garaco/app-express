@@ -7,16 +7,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" >
 
-  <div class="clip" >
+  <!-- <div class="clip" >
 
-  </div>
+  </div> -->
+  <div class="degradado">
+
+  
   <ion-col size="12"></ion-col>
   <ion-col size="8" offset="2" >
-    <ion-card>
+    <ion-card class="animated fadeIn">
       <ion-card-header style="text-align: center;" >
-        <ion-card-title>Bienvenido Aejandro Garcia</ion-card-title>
+        <ion-card-title>Bienvenido {{ user.name }} {{ user.surname }} </ion-card-title>
         <ion-card-subtitle>¿Que desas realizar hoy?</ion-card-subtitle>
       </ion-card-header>
 
@@ -25,7 +28,7 @@
   
 
   <ion-card [routerLink]="['/mandados']">
-    <ion-card-content>
+    <ion-card-content class="animated fadeIn">
       <ion-row>
         <ion-col size="8">
           <ion-card-title>Mandados</ion-card-title>
@@ -40,7 +43,7 @@
   </ion-card>
 
   <ion-card [routerLink]="['/compras']">
-    <ion-card-content>
+    <ion-card-content class="animated fadeIn">
       <ion-row>
         <ion-col size="3">
           <ion-thumbnail>
@@ -55,7 +58,7 @@
   </ion-card>
 
   <ion-card [routerLink]="['/servicios']">
-    <ion-card-content>
+    <ion-card-content class="animated fadeIn">
       <ion-row>
         <ion-col size="8">
           <ion-card-title>Servicios</ion-card-title>
@@ -70,7 +73,7 @@
   </ion-card>
 
   <ion-card [routerLink]="['/mis-datos']">
-    <ion-card-content>
+    <ion-card-content class="animated fadeIn">
 
       <ion-row>
         <ion-col size="3">
@@ -80,11 +83,12 @@
         </ion-col>
         <ion-col>
 
-          <ion-card-title>Mis datos</ion-card-title>  
+          <ion-card-title>Notificaciones</ion-card-title>  
         </ion-col>
       </ion-row>
 
     </ion-card-content>
   </ion-card>
-  
+
+  </div>
 </ion-content>
