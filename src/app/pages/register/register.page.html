@@ -15,7 +15,7 @@
         <ion-row>
         
           <ion-col size="12">
-            <ion-item lines="none" >
+            <ion-item lines="none" color="transparent" >
               <label class="custom-field one">
                 <input [(ngModel)]="users.name" required type="text"/>
                 <span class="placeholder">Nombre</span>
@@ -24,7 +24,7 @@
           </ion-col>
     
           <ion-col size="12">
-            <ion-item lines="none" >
+            <ion-item lines="none" color="transparent" >
               <label class="custom-field one">
                 <input [(ngModel)]="users.surname" required type="text"/>
                 <span class="placeholder">Apellidos</span>
@@ -33,7 +33,7 @@
           </ion-col>
     
           <ion-col size="12">
-            <ion-item lines="none" >
+            <ion-item lines="none" color="transparent" >
               <label class="custom-field one">
                 <input [(ngModel)]="users.email" required type="text"/>
                 <span class="placeholder">Email</span>
@@ -42,7 +42,7 @@
           </ion-col>
     
           <ion-col size="12">
-            <ion-item lines="none" >
+            <ion-item lines="none" color="transparent" >
               <label class="custom-field one">
                 <input [(ngModel)]="users.phone" required type="text"/>
                 <span class="placeholder">Telefono</span>
@@ -68,9 +68,14 @@
           </ion-col>
 
           <ion-col size="12" style="width: 40%;" >
-            <ion-button expand="block" (click)="send()">
-              registrar 
+            <ion-button  expand="block" (click)="send()" [disabled]="spinner">
+              <ion-label *ngIf="!spinner">
+                registrar 
+              </ion-label> 
+              <ion-spinner *ngIf="spinner" name="lines-small"></ion-spinner>
             </ion-button>
+            
+
           </ion-col> 
 
         </ion-row>
@@ -80,38 +85,34 @@
     </ion-list>
 
     <ion-list *ngIf="envio" >
-      <ion-item lines="none" >
+      <ion-item lines="none" color="transparent" >
         <label class="custom-field one">
           <input [(ngModel)]="codigo" required type="text"/>
           <span class="placeholder">Ingrese su Codigo</span>
         </label>
       </ion-item>
       <ion-row>
-        <ion-col size="12" style="width: 40%;" >
+        <!-- <ion-col size="12" style="width: 40%;" >
         
           <ion-button expand="block" (click)="login()" >
             Ingresar 
           </ion-button>
         
-        </ion-col>  
+        </ion-col>   -->
+
+        <ion-col size="12" style="width: 40%; " >
+          <ion-button expand="block" (click)="login()" [disabled]="loadin">
+            <ion-label *ngIf="!loadin">
+              Ingresar 
+            </ion-label> 
+            <ion-spinner *ngIf="loadin" name="lines-small"></ion-spinner>
+          </ion-button> 
+        </ion-col>
+
       </ion-row>
       
       
     </ion-list>
-
-    <ion-col size="12" *ngIf="loadin"  >
-
-      <ion-item style="width: 40%; left: 30%;" lines="none" >
-      
-        <ion-label>
-          Cargando....
-        </ion-label>
-      
-      </ion-item>  
-      
-    
-      <ion-progress-bar type="indeterminate"></ion-progress-bar>
-    </ion-col>
     
   
 </ion-content>

@@ -88,7 +88,8 @@
 .custom-field.one input:valid,
 .custom-field.one input:focus {
   border-color: #2599f8;
-  transition-delay: 0.1s
+  transition-delay: 0.1s;
+  color: #555555;
 }
 
 .custom-field.one input.dirty + .placeholder,
@@ -140,7 +141,8 @@
 .custom-field.one textarea:valid,
 .custom-field.one textarea:focus {
   border-color: #2599f8;
-  transition-delay: 0.1s
+  transition-delay: 0.1s;
+  color: #555555;
 }
 
 .custom-field.one textarea.dirty + .placeholder,
@@ -151,6 +153,7 @@
   color: #2599f8;
   background: #fff;
 }
+
 
 .negritas{
  font-weight: bold;

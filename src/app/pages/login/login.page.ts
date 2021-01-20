@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   codigo:string;
   email:string='';
   loadin:boolean=false;
-
+  spinner:boolean=false;
 
   constructor(
     public alertController: AlertController,
@@ -39,13 +39,16 @@ export class LoginPage implements OnInit {
 
 
   async send(){
+    this.spinner=true;
     const token = this.generaNss();
 
      if(this.email !=='' ){
+      
       this.getEnviar(this.email, token);
      }else{
+      this.spinner=false;
       const toast = await this.toastController.create({
-        message: 'Ingresar email pro favor.',
+        message: 'Ingresar email por favor.',
         position:"top",
         animated:true,
         color:'danger',
@@ -58,12 +61,12 @@ export class LoginPage implements OnInit {
   }
 
   getEnviar( email:string, token:string ){
-    this.loadin=true;
-    this.express.getToken( email, token )
+    
+    this.express.getToken(token, email)
                 .subscribe( async result =>{
                   
                   if(result.message === 'email enviado'){
-
+                    this.loadin=true;
                     const alert = await this.alertController.create({
                       cssClass: 'my-custom-class',
                       subHeader:'Se ha enviado un codigo al email registrado',
@@ -76,6 +79,7 @@ export class LoginPage implements OnInit {
                     this.envio = true;
 
                   }else{
+                    this.loadin=false;
                     const toast = await this.toastController.create({
                       message: result.message,
                       position:"top",

@@ -17,6 +17,7 @@ export class RegisterPage implements OnInit {
   envio:boolean=false;
   codigo:string;
   loadin:boolean=false;
+  spinner:boolean=false;
   users:User ={
     id: 0,
     phone: '',
@@ -60,31 +61,33 @@ export class RegisterPage implements OnInit {
   }
 
   async send(){
+    this.spinner=true;
     this.users.token = this.generaNss();
     this.users.phone = String(this.users.phone)
     if( this.users.phone !== '' && this.users.email !== '' && this.users.name !== '' && this.users.surname !== ''
     && this.users.location !== '' && this.users.email !== ''){
       this.express.getNewUSer(this.users)
       .subscribe( async result => {
-        console.log(result['message']);
         
-        if(result['message']){
 
+        if(result['message']){
+          
           this.getEnviar();
         }else{
         
-          
+          this.spinner=false;
           const toast = await this.toastController.create({
             message: 'Email ya ha sido registrado',
             position:"top",
             animated:true,
             color:'danger',
-            duration: 2000
+            duration: 2500
           });
           toast.present();
         }
       } );
     }else{
+      this.spinner=false;
       const toast = await this.toastController.create({
         message: 'LLenar todos los campos por favor',
         position:"top",
@@ -113,7 +116,7 @@ export class RegisterPage implements OnInit {
                     });
                 
                     await alert.present();
-                
+                    this.spinner=false;
                     this.envio = true;
 
                   }
