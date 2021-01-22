@@ -3,6 +3,7 @@ import { environment } from '../../environments/environment.prod';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { map } from "rxjs/operators";
 import { User } from '../models/userModels';
+import { Order } from '../models/orderModels';
 
 @Injectable({
   providedIn: 'root'
@@ -68,6 +69,16 @@ export class ExpressService {
   getToken( token:string, email:string ){
     return this.getQuery(`generate/${token}/${email}`)
                     .pipe( map( result => result['row']['data'] ));
+  }
+
+  postEditUser(users: User){
+    return this.postQuery( 'edit/user',users)
+               .pipe( map( result => result['row']['data'] ));
+  }
+
+  postSaveOrde(orde: Order){
+    return this.postQuery( 'save/orde',orde)
+               .pipe( map( result => result['row']['data'] ));
   }
 
 }

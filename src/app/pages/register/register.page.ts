@@ -47,7 +47,8 @@ export class RegisterPage implements OnInit {
       component: ModalPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'registro': true
+        'registro': true,
+        'location':false
       }
     });
      await modal.present();
@@ -85,8 +86,20 @@ export class RegisterPage implements OnInit {
           });
           toast.present();
         }
+      }, async err =>{
+                      
+        const toast = await this.toastController.create({
+          message: 'Lo sentimos ha ocurrido un error',
+          position:"top",
+          animated:true,
+          color:'danger',
+          duration: 2000
+        });
+        toast.present();
+        
       } );
     }else{
+      
       this.spinner=false;
       const toast = await this.toastController.create({
         message: 'LLenar todos los campos por favor',
@@ -120,6 +133,18 @@ export class RegisterPage implements OnInit {
                     this.envio = true;
 
                   }
+                }, async err =>{
+                      
+                  this.spinner=false;
+                  const toast = await this.toastController.create({
+                    message: 'Lo sentimos ha ocurrido un error',
+                    position:"top",
+                    animated:true,
+                    color:'danger',
+                    duration: 2000
+                  });
+                  toast.present();
+                  
                 } );
 
   }

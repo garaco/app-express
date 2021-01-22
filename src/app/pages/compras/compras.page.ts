@@ -22,7 +22,8 @@ export class ComprasPage implements OnInit {
       component: ModalPage,
       cssClass: 'my-custom-class',
       componentProps: {
-        'registro': false
+        'registro': false,
+        'location':false
       }
     });
      await modal.present();

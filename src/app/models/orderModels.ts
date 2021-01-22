@@ -9,4 +9,5 @@ export interface Order{
     status?: string;
     payment?: string;
     create_at?:Date;
+    id_user?:number;
 }

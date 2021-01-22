@@ -22,8 +22,6 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.user = this.express.getStorage('user');
-
-    console.log(this.user);
     
   }
 

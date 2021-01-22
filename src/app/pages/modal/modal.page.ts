@@ -11,6 +11,7 @@ import { ExpressService } from 'src/app/services/express.service';
 export class ModalPage implements OnInit {
 
   @Input() registro;
+  @Input() location;
 
   mapboxgl:string = 'pk.eyJ1IjoibGFyc3NvbiIsImEiOiJja2MxbGI1djUwdTdzMnJydTdvYWVnOXBnIn0.rr-85HZZ4gjU-_4QW496hg';
   datos:string=''; 
@@ -43,28 +44,54 @@ export class ModalPage implements OnInit {
 
   getmapa(){
     this.vermapa=true;
+
+    if(!this.location){
+      this.map = new Leaflet.Map('map').setView([18.4410739, -95.2076404], 18);
+    }else{
+      let latLng = this.location.split(',');
+      let lat = Number(latLng[0]);
+      let lng = Number(latLng[1]);
     
-    this.map = new Leaflet.Map('map').setView([18.4410739, -95.2076404], 18);
+      this.map = new Leaflet.Map('map').setView([lat, lng], 18);
+    }
+    
 
     new Leaflet.tileLayer(this.title, {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
 
-    this.map.locate({enableHighAccuracy:true })
 
-    this.map.on('locationfound', e =>{
-      this.gl = `${e.latlng.lat} , ${e.latlng.lng}`;
-      this.market(e.latlng.lat , e.latlng.lng);
-      this.lat=e.latlng.lat;
-      this.lng=e.latlng.lng;
-    });
+    if(!this.location){
+      this.map.locate({enableHighAccuracy:true })
+
+      this.map.on('locationfound', e =>{
+        this.gl = `${e.latlng.lat} , ${e.latlng.lng}`;
+        
+        this.market(e.latlng.lat , e.latlng.lng);
+        this.lat=e.latlng.lat;
+        this.lng=e.latlng.lng;
+      });
+    }else{
+
+      let latLng = this.location.split(',');
+      let lat = Number(latLng[0]);
+      let lng = Number(latLng[1]);
+      
+      this.lat=lat;
+      this.lng=lng;
+
+      this.gl = `${lat} , ${lng}`;
+
+      this.market(lat , lng);
+    }
+
   
   }
 
-  market(lng: number, lat: number){
+  market(lat: number, lng: number){
 
     //crear un marcador draggable
-     this.marker =  new Leaflet.marker([lng, lat], {draggable:'true'})
+     this.marker =  new Leaflet.marker([lat, lng], {draggable:'true'})
                         .addTo(this.map)
                         .bindPopup('Mueveme para seleccionar tu direccion.')
                         .openPopup();
@@ -74,7 +101,9 @@ export class ModalPage implements OnInit {
         
         this.lat=position.lat;
         this.lng=position.lng;
-      
+
+        this.gl = `${position.lat} , ${position.lng}`;
+
         });
 
   }

@@ -21,14 +21,14 @@
       </ion-col>
       <ion-col size="10">
         <ion-item>
-          <ion-label class="ion-text-wrap" > {{ direccion }} </ion-label>
+          <ion-label class="ion-text-wrap" > {{ orden.direction_init }} </ion-label>
         </ion-item>
       </ion-col>
 
       <ion-col size="12">
         <ion-item lines="none" >
           <label class="custom-field one">
-            <textarea required rows="3"></textarea>
+            <textarea [(ngModel)]="orden.comment_init" required rows="3"></textarea>
             <span class="placeholder">¿Que se va arealizar?</span>
           </label>
         </ion-item>
@@ -52,14 +52,14 @@
       </ion-col>
       <ion-col size="10">
         <ion-item>
-          <ion-label class="ion-text-wrap" > {{ destino }} </ion-label>
+          <ion-label class="ion-text-wrap" > {{ orden.direction_final }} </ion-label>
         </ion-item>
       </ion-col>
 
       <ion-col size="12">
         <ion-item lines="none" >
           <label class="custom-field one">
-            <textarea required rows="3"></textarea>
+            <textarea [(ngModel)]="orden.comment_final" required rows="3"></textarea>
             <span class="placeholder">¿Que se va arealizar?</span>
           </label>
         </ion-item>
@@ -75,9 +75,9 @@
         <ion-label>Meodo de pago</ion-label>
         <ion-item>
           
-          <ion-select placeholder="Selecciones un metodo">
-            <ion-select-option value="E">Efectivo</ion-select-option>
-            <ion-select-option value="T">Transferencia Bancaria</ion-select-option>
+          <ion-select placeholder="Selecciones un metodo" [(ngModel)]="orden.payment" >
+            <ion-select-option value="Efectivo">Efectivo</ion-select-option>
+            <ion-select-option value="Tarjeta">Tarjeta</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -89,8 +89,11 @@
     <ion-row>
 
       <ion-col size="4" offset="4">
-        <ion-button (click)="guardar()">
-          Aceptar
+        <ion-button (click)="guardar()" style="width: 100%; ">
+          <ion-label *ngIf="!loadin">
+            Guardar 
+          </ion-label> 
+          <ion-spinner *ngIf="loadin" name="lines-small"></ion-spinner>
         </ion-button>
       </ion-col>
     
