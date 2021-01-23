@@ -13,7 +13,6 @@ export class ModalPage implements OnInit {
   @Input() registro;
   @Input() location;
 
-  mapboxgl:string = 'pk.eyJ1IjoibGFyc3NvbiIsImEiOiJja2MxbGI1djUwdTdzMnJydTdvYWVnOXBnIn0.rr-85HZZ4gjU-_4QW496hg';
   datos:string=''; 
   gl:string='';
   direccion:string='';

@@ -64,20 +64,20 @@ export class LoginPage implements OnInit {
                 .subscribe( async result =>{
                   
                   if(result.message === 'email enviado'){
-                    this.loadin=true;
+                    
                     const alert = await this.alertController.create({
                       cssClass: 'my-custom-class',
                       subHeader:'Se ha enviado un codigo al email registrado',
                       message: '',
                       buttons: ['OK']
                     });
-                    this.loadin=false;
+                    this.spinner=false;
                     await alert.present();
                 
                     this.envio = true;
 
                   }else{
-                    this.loadin=false;
+                    this.spinner=false;
                     const toast = await this.toastController.create({
                       message: result.message,
                       position:"top",
