@@ -93,4 +93,9 @@ export class ExpressService {
     .pipe( map( result => result['row']['data'] ));
   }
 
+  getlistAll( id:string ){
+    return this.getQuery( `list/all/${id}`)
+               .pipe( map( result => result['row']));
+ }
+
 }

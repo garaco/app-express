@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { EmailComposer } from '@ionic-native/email-composer';
-import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { ExpressService } from 'src/app/services/express.service';
 

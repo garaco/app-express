@@ -1,0 +1,28 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary" >
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Historial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-card *ngFor="let list of lists" class="animated fadeIn">
+    <ion-card-header *ngIf="list.status == 'Finalizado'" color="success" >
+      <ion-card-title>{{ list.tipo }}</ion-card-title>
+      <ion-card-subtitle>Fecha: {{ list.create_at | date:'d/M/yy, h:mm a'  }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-header *ngIf="list.status == 'Pendiente'" color="warning" >
+      <ion-card-title>{{ list.tipo }}</ion-card-title>
+      <ion-card-subtitle>Fecha: {{ list.create_at | date:'d/M/yy, h:mm a' }}</ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <h3> Estatus: {{ list.status }} </h3> 
+      <h3> Metodo de Pago: {{ list.payment }} </h3>
+    </ion-card-content>
+  </ion-card>
+  
+</ion-content>
