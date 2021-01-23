@@ -4,6 +4,8 @@ import { HttpClient,HttpHeaders } from '@angular/common/http';
 import { map } from "rxjs/operators";
 import { User } from '../models/userModels';
 import { Order } from '../models/orderModels';
+import { Market } from '../models/marketModels';
+import { Service } from '../models/ServicesModels';
 
 @Injectable({
   providedIn: 'root'
@@ -79,6 +81,16 @@ export class ExpressService {
   postSaveOrde(orde: Order){
     return this.postQuery( 'save/orde',orde)
                .pipe( map( result => result['row']['data'] ));
+  }
+
+  postSaveMarket( list:Market ){
+    return this.postQuery( 'save/market',list)
+    .pipe( map( result => result['row']['data'] ));
+  }
+
+  postSaveService( list:Service ){
+    return this.postQuery( 'save/service',list)
+    .pipe( map( result => result['row']['data'] ));
   }
 
 }
