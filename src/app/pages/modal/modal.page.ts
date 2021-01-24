@@ -26,7 +26,6 @@ export class ModalPage implements OnInit {
   
   constructor(private modal: ModalController,
             private express:ExpressService) { 
-    // aqui va a ir el mapa
     
   }
 
@@ -43,48 +42,49 @@ export class ModalPage implements OnInit {
 
   getmapa(){
     this.vermapa=true;
-
-    if(!this.location){
-      this.map = new Leaflet.Map('map').setView([18.4410739, -95.2076404], 18);
-    }else{
-      let latLng = this.location.split(',');
-      let lat = Number(latLng[0]);
-      let lng = Number(latLng[1]);
+    const mapa = new Leaflet.Map('map');
     
-      this.map = new Leaflet.Map('map').setView([lat, lng], 18);
-    }
-    
-
     new Leaflet.tileLayer(this.title, {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
-
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(mapa);
 
     if(!this.location){
-      this.map.locate({enableHighAccuracy:true })
+      this.map = mapa.setView([18.448255704152956, -95.21236202278033], 18);
 
+      this.lat="18.448255704152956";
+      this.lng="-95.21236202278033";
+
+      this.map.locate({enableHighAccuracy:true });
+        
       this.map.on('locationfound', e =>{
         this.gl = `${e.latlng.lat} , ${e.latlng.lng}`;
-        
-        this.market(e.latlng.lat , e.latlng.lng);
         this.lat=e.latlng.lat;
         this.lng=e.latlng.lng;
+        this.map = mapa.setView([e.latlng.lat, e.latlng.lng], 18);
+        this.market(e.latlng.lat , e.latlng.lng);
       });
-    }else{
 
+      this.map.on('locationerror', e => {
+        this.market(18.448255704152956, -95.21236202278033);
+      });
+      
+
+    }else{
       let latLng = this.location.split(',');
       let lat = Number(latLng[0]);
       let lng = Number(latLng[1]);
-      
+    
+      this.map = mapa.setView([lat, lng], 18);
+
       this.lat=lat;
       this.lng=lng;
 
       this.gl = `${lat} , ${lng}`;
 
       this.market(lat , lng);
-    }
 
-  
+    }
+    
   }
 
   market(lat: number, lng: number){

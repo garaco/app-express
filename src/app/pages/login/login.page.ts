@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { ExpressService } from 'src/app/services/express.service';
+import * as Leaflet from 'leaflet';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class LoginPage implements OnInit {
   email:string='';
   loadin:boolean=false;
   spinner:boolean=false;
+  map:Leaflet.Map;
+
 
   constructor(
     public alertController: AlertController,
@@ -28,10 +31,13 @@ export class LoginPage implements OnInit {
         if(this.constructor.name ==  'LoginPage'){
           navigator['app'].exitApp();
         }
-      });
+      });      
      }
 
   ngOnInit() {
+    const mapa = new Leaflet.Map('map');
+    this.map = mapa.setView([18.448255704152956, -95.21236202278033], 18);
+    this.map.locate({enableHighAccuracy:true });
   }
 
 
