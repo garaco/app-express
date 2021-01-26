@@ -51,9 +51,6 @@ export class ModalPage implements OnInit {
     if(!this.location){
       this.map = mapa.setView([18.448255704152956, -95.21236202278033], 18);
 
-      this.lat="18.448255704152956";
-      this.lng="-95.21236202278033";
-
       this.map.locate({enableHighAccuracy:true });
         
       this.map.on('locationfound', e =>{
@@ -65,6 +62,8 @@ export class ModalPage implements OnInit {
       });
 
       this.map.on('locationerror', e => {
+        this.lat="18.448255704152956";
+        this.lng="-95.21236202278033";
         this.market(18.448255704152956, -95.21236202278033);
       });
       

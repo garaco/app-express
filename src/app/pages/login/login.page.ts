@@ -31,7 +31,8 @@ export class LoginPage implements OnInit {
         if(this.constructor.name ==  'LoginPage'){
           navigator['app'].exitApp();
         }
-      });      
+      }); 
+
      }
 
   ngOnInit() {

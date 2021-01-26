@@ -6,6 +6,7 @@ import { User } from '../models/userModels';
 import { Order } from '../models/orderModels';
 import { Market } from '../models/marketModels';
 import { Service } from '../models/ServicesModels';
+import { Direction } from '../models/directionModel';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +15,7 @@ export class ExpressService {
 
   API_URI:string = environment.api_uri;
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getQuery( params:string ){
     const headers = new HttpHeaders({
@@ -85,17 +85,42 @@ export class ExpressService {
 
   postSaveMarket( list:Market ){
     return this.postQuery( 'save/market',list)
-    .pipe( map( result => result['row']['data'] ));
+               .pipe( map( result => result['row']['data'] ));
   }
 
   postSaveService( list:Service ){
     return this.postQuery( 'save/service',list)
-    .pipe( map( result => result['row']['data'] ));
+               .pipe( map( result => result['row']['data'] ));
   }
 
   getlistAll( id:string ){
     return this.getQuery( `list/all/${id}`)
                .pipe( map( result => result['row']));
+ }
+
+ getDiection( id:string ){
+  return this.getQuery( `direction/${id}`)
+             .pipe( map( result => result['row']));
+ }
+
+ postSaveDirection( list:Direction ){
+  return this.postQuery( 'direction/add',list)
+             .pipe( map( result => result['row']['data'] ));
+ }
+
+ postDirectionPrincipal( list:any ){
+  return this.postQuery( 'edit/user/address',list)
+              .pipe( map( result => result['row']['data'] ));
+ }
+
+ postEditDirection( list:Direction ){
+  return this.postQuery( 'direction/edit',list)
+              .pipe( map( result => result['row']['data'] ));
+ }
+
+ postDeleteDirection( list:Direction ){
+  return this.postQuery( 'direction/delete',list)
+              .pipe( map( result => result['row']['data'] ));
  }
 
 }

@@ -1,0 +1,65 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="primary" >
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Direcciones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item style="justify-content: center;" lines="none">
+    <small> Deslizar a la derecha o izquierda para editar o eliminar  </small>
+  </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="newDirection()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list>
+
+    <ion-item-sliding [disabled]="loadin" >
+      <ion-item lines="full">
+        <ion-label class="ion-text-wrap" >{{ user.direction }}</ion-label>
+      </ion-item>
+      <ion-item-options side="start" (click)="update(user.location)">
+        <ion-item-option>
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+  
+      <ion-item-options side="end">
+        <ion-item-option disabled="true" color="danger">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <!-- direcciones adicionales -->
+    
+    <ion-item-sliding *ngFor="let list of lists" class="animated fadeIn fast" [disabled]="loadin" >
+      <ion-item lines="full">
+        <ion-label class="ion-text-wrap" >{{ list.direction }}</ion-label>
+      </ion-item>
+      <ion-item-options side="start" (click)="updateList(list)">
+        <ion-item-option>
+          <ion-icon *ngIf="!loadin" slot="icon-only" name="create-outline"></ion-icon>
+          <ion-spinner *ngIf="loadin" name="lines"></ion-spinner>
+        </ion-item-option>
+      </ion-item-options>
+  
+      <ion-item-options side="end" (click)="deleteList(list)">
+        <ion-item-option color="danger">
+          <ion-icon *ngIf="!loadin" slot="icon-only" name="trash-outline"></ion-icon>
+          <ion-spinner *ngIf="loadin" name="lines"></ion-spinner>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+
+  </ion-list>
+
+</ion-content>
