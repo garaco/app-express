@@ -1,7 +1,9 @@
-<ion-header [translucent]="true" class="ion-no-border" mode="ios">
+<ion-header class="ion-no-border" mode="ios">
   <ion-toolbar color="primary" >
-    <ion-buttons slot="start">
-      <ion-menu-button color="light"></ion-menu-button>
+    <ion-buttons slot="start" >
+      <ion-button [routerLink]="['/inicio']">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title>Compras</ion-title>
   </ion-toolbar>
@@ -9,7 +11,6 @@
 
 
 <ion-content>
-
   <ion-grid fixed>
     <ion-row>
       <ion-col size="12"> 

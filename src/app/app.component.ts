@@ -12,7 +12,6 @@ import { ExpressService } from './services/express.service';
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public selectedIndex = 0;
 
   constructor(
     private platform: Platform,
@@ -35,10 +34,5 @@ export class AppComponent implements OnInit {
     if(this.express.getStorage('user')){
       this.router.navigateByUrl('inicio');
     }
-  }
-
-  salir(){
-    localStorage.removeItem('user');
-    this.router.navigateByUrl('login');
   }
 }
