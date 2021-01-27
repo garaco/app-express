@@ -4,6 +4,18 @@
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title>Inicio</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/notificacion']">
+        <ion-icon color="light" name="notifications"></ion-icon>
+
+        <!-- <ion-icon style="color:#ff0037" name="notifications"></ion-icon>
+        
+        <ion-badge style="background-color:#ff0037"> <small>66</small> </ion-badge> -->
+      </ion-button>
+    </ion-buttons>
+
+    
   </ion-toolbar>
 </ion-header>
 
@@ -19,14 +31,14 @@
       <ion-list-header>El mejor servicio de la region</ion-list-header>
       
       <ion-menu-toggle auto-hide="false" >
-        <ion-item (click)="selectedIndex = 1" routerDirection="root" [routerLink]="['/inicio']"  lines="none" detail="false" [class.selected]="selectedIndex == 1">
-          <ion-icon slot="start" name="home-outline"></ion-icon>
-          <ion-label>Inicio</ion-label>
+        <ion-item (click)="selectedIndex = 1" routerDirection="root" [routerLink]="['/notificacion']"  lines="none" detail="false" [class.selected]="selectedIndex == 1">
+          <ion-icon slot="start" name="notifications-outline"></ion-icon>
+          <ion-label>Notificaciones</ion-label>
         </ion-item>
 
         <ion-item (click)="selectedIndex = 2" routerDirection="root" [routerLink]="['/historial']"  lines="none" detail="false" [class.selected]="selectedIndex == 2">
-          <ion-icon slot="start" name="checkbox-outline"></ion-icon>
-          <ion-label>Servicios Realizados</ion-label>
+          <ion-icon slot="start" name="chatbubbles-outline"></ion-icon>
+          <ion-label>Mensajes</ion-label>
         </ion-item>
 
         <ion-item (click)="selectedIndex = 3" routerDirection="root" [routerLink]="['/direcciones']" lines="none" detail="false" [class.selected]="selectedIndex == 3">
@@ -67,8 +79,13 @@
       <ion-card-header style="text-align: center;" >
         <ion-card-title>Bienvenido {{ user.name }} {{ user.surname }} </ion-card-title>
         <ion-card-subtitle>¿Que desas realizar hoy?</ion-card-subtitle>
-      </ion-card-header>
 
+        <!-- <ion-chip color="success">
+          <ion-icon name="chatbubbles"></ion-icon>
+          <ion-label>nuevo mensaje</ion-label>
+        </ion-chip> -->
+      </ion-card-header>
+      
     </ion-card>
   </ion-col>
   
@@ -118,7 +135,7 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-card [routerLink]="['/notificacion']">
+  <ion-card [routerLink]="['/historial']">
     <ion-card-content class="animated fadeIn">
 
       <ion-row>
@@ -129,7 +146,7 @@
         </ion-col>
         <ion-col>
 
-          <ion-card-title>Notificaciones</ion-card-title>  
+          <ion-card-title>Historial de Pedidos</ion-card-title>  
         </ion-col>
       </ion-row>
 
