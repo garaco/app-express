@@ -19,6 +19,7 @@ export class DireccionesPage {
     location:'',
     id_user:0
   }
+  load:boolean=false;
 
   loadin:boolean=false;
 
@@ -27,13 +28,15 @@ export class DireccionesPage {
               private toastController: ToastController,
               private alertController: AlertController
     ) {
+    this.load=true;
     this.user = this.express.getStorage('user');
     this.express.getDiection( this.user.id )
                 .subscribe( result =>{                  
                   this.lists = result.data;
+                  this.load=false;
                 }, 
                 async err =>{
-                  
+                  this.load=false;
                   const toast = await this.toastController.create({
                     message: 'Lo sentimos ha ocurrido un error',
                     position:"top",

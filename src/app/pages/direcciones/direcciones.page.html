@@ -1,4 +1,4 @@
-<ion-header [translucent]="true" class="ion-no-border">
+<ion-header [translucent]="true" class="ion-no-border" mode="ios">
   <ion-toolbar color="primary" >
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
@@ -21,7 +21,11 @@
 
   <ion-list>
 
-    <ion-item-sliding [disabled]="loadin" >
+    <ion-col size="12" offset="5" *ngIf="load" >
+      <ion-spinner color="primary" name="lines-small"></ion-spinner>
+    </ion-col>
+
+    <ion-item-sliding *ngIf="!load" [disabled]="loadin" >
       <ion-item lines="full">
         <ion-label class="ion-text-wrap" >{{ user.direction }}</ion-label>
       </ion-item>

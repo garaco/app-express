@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import * as Leaflet from 'leaflet';
 import { ExpressService } from 'src/app/services/express.service';
 
@@ -22,10 +22,14 @@ export class ModalPage implements OnInit {
   lat:any;
   lng:any;
   marker:Leaflet.marker;
+  user:any;
+  lists:any[];
+  load:boolean=false;
 
   
   constructor(private modal: ModalController,
-            private express:ExpressService) { 
+            private express:ExpressService,
+            private toastController: ToastController) { 
     
   }
 
@@ -36,6 +40,26 @@ export class ModalPage implements OnInit {
       setTimeout(() => {
         this.getmapa();
       }, 1000);
+    }else{
+      this.load=true;
+      this.user = this.express.getStorage('user');
+      this.express.getDiection( this.user.id )
+                  .subscribe( result =>{     
+                    this.load=false;             
+                    this.lists = result.data;
+                    
+                  }, 
+                  async err =>{
+                    this.load=false;
+                    const toast = await this.toastController.create({
+                      message: 'Lo sentimos ha ocurrido un error',
+                      position:"top",
+                      animated:true,
+                      color:'danger',
+                      duration: 2000
+                    });
+                    toast.present();
+                  });
     }
     
   }
@@ -122,6 +146,11 @@ export class ModalPage implements OnInit {
     this.modal.dismiss();
   }
 
-
+  save(direction:string,gl:string ){
+    this.modal.dismiss({
+      direccion:direction,
+      coordenadas:gl
+    });
+  }
 
 }
