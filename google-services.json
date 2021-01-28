@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "318299709514",
+    "project_id": "app-express-36b8a",
+    "storage_bucket": "app-express-36b8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318299709514:android:a05427d57fcd59c21b06b3",
+        "android_client_info": {
+          "package_name": "com.garaco.express"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "318299709514-bi47t2mgntp4o4q9878i9inj4g69hmfu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvJnqgYKQpbLsWTyLuNW0i6hJhULR1-ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "318299709514-bi47t2mgntp4o4q9878i9inj4g69hmfu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
