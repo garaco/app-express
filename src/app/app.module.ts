@@ -10,9 +10,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { HttpClientModule } from '@angular/common/http';
-
-// FCM
-import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,11 +22,11 @@ import { FirebaseX } from '@ionic-native/firebase-x/ngx';
     HttpClientModule
   ],
   providers: [
+    FCM,
     StatusBar,
     SplashScreen,
     EmailComposer,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    FirebaseX
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
 })

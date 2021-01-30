@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { ExpressService } from 'src/app/services/express.service';
-
-import { FirebaseX } from '@ionic-native/firebase-x/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'app-folder',
@@ -19,7 +18,7 @@ export class FolderPage implements OnInit {
   constructor(private platform:Platform, 
               private express:ExpressService,
               private router: Router,
-              private firebaseX: FirebaseX) {
+              private fcm: FCM) {
     this.subscribe = this.platform.backButton.subscribeWithPriority( 666666, () =>{
       if(this.constructor.name ==  'FolderPage'){
         navigator['app'].exitApp();
@@ -29,10 +28,9 @@ export class FolderPage implements OnInit {
 
   ngOnInit() {
     this.user = this.express.getStorage('user');
-          // get FCM token
-          this.firebaseX.getToken()
-          .then(token => console.log(`The token is ${token}`)) // save the token server-side and use it to push notifications to this device
-          .catch(error => console.error('Error getting token', error));
+    this.fcm.getToken().then(token => {
+      console.log(token);
+    });
   }
 
   salir(){
