@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { HttpClientModule } from '@angular/common/http';
-import { FCM } from '@ionic-native/fcm/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +21,6 @@ import { FCM } from '@ionic-native/fcm/ngx';
     HttpClientModule
   ],
   providers: [
-    FCM,
     StatusBar,
     SplashScreen,
     EmailComposer,

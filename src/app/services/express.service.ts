@@ -123,4 +123,24 @@ export class ExpressService {
               .pipe( map( result => result['row']['data'] ));
  }
 
+ getTokenFirebase( id:string, token:string ){
+  return this.getQuery( `token/${id}/${token}`)
+             .pipe( map( result => result['row']));
+ }
+
+ getNotificacion( id:string){
+  return this.getQuery( `notificacion/${id}`)
+             .pipe( map( result => result['row']['data']));
+ }
+
+ getCountNotificacion( id:string){
+  return this.getQuery( `notificacion/count/${id}`)
+             .pipe( map( result => result['row']['data']));
+ }
+
+ getLeidosNotificacion( id:string){
+  return this.getQuery( `notificacion/leidos/${id}`)
+             .pipe( map( result => result['row']['data']));
+ }
+
 }

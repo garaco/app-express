@@ -7,11 +7,12 @@
 
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/notificacion']">
-        <ion-icon color="light" name="notifications"></ion-icon>
 
-        <!-- <ion-icon style="color:#ff0037" name="notifications"></ion-icon>
-        
-        <ion-badge style="background-color:#ff0037"> <small>66</small> </ion-badge> -->
+        <ion-icon *ngIf="!notifi" color="light" name="notifications"></ion-icon>
+
+        <ion-icon *ngIf="notifi" style="color:#ff0037" name="notifications"></ion-icon>
+        <ion-badge *ngIf="notifi" style="background-color:#ff0037"> <small>{{ cont }}</small> </ion-badge>
+
       </ion-button>
     </ion-buttons>
 

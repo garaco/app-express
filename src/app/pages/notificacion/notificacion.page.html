@@ -10,5 +10,21 @@
 </ion-header>
 
 <ion-content>
+  <ion-col size="12" offset="5" *ngIf="load" >
+    <ion-spinner color="primary" name="lines-small"></ion-spinner>
+  </ion-col>
 
+  
+  <ion-list>
+    <ion-item lines="full" *ngFor="let item of list">
+      <ion-label>    
+        <h2 style="text-align: center; font-size: 18px; font-weight: bolder;">{{ item.title }}</h2>
+        <ion-label class="ion-text-wrap" style="text-align: justify;">
+          {{ item.message }}
+        </ion-label>
+      </ion-label>
+      
+    </ion-item>
+  </ion-list>
+  
 </ion-content>
